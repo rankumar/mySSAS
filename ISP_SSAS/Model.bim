@@ -747,10 +747,6 @@
           {
             "name": "Prev Month",
             "expression": "CALCULATE((Sales[Sales]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))"
-          },
-          {
-            "name": "Copy of Prev Month",
-            "expression": "CALCULATE((Sales[Sales]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))"
           }
         ],
         "annotations": [
