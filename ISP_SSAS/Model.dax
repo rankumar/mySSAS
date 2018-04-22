@@ -1,0 +1,46 @@
+CREATE MEASURE 'Sales'[Sales] = ROUND(sum(Sales[SalesAmount]),2)
+CALCULATION PROPERTY GENERAL
+    DESCRIPTION = 'Total Sales'
+;
+
+CREATE MEASURE 'Sales'[Cost] = ROUND( sum(Sales[ProductStandardCost]),2)	
+;
+
+CREATE MEASURE 'Sales'[Profit] = [Sales]-[Cost]
+;
+
+CREATE MEASURE 'Sales'[Margin %] = ([Profit]/[Cost])*100
+CALCULATION PROPERTY GENERAL
+    KPITARGETEXPRESSION = ''''''''''Sales''''''''''[Sales]
+    KPISTATUSEXPRESSION = var x='Sales'[Margin %]/'Sales'[_Margin % Goal] return
+            if(ISBLANK(x),BLANK(),
+                    If(x<0.33,-1,
+	                If(x<0.66,0,1)
+                )
+            )
+            
+    KPIANNOTATIONS = 'GoalType = "Measure", KpiStatusType = "Linear", KpiThresholdType = "Percentage", KpiThresholdOrdering = "Ascending", KpiThresholdCount = "2", KpiThreshold_0 = "33", KpiThreshold_1 = "66"'
+;
+
+CREATE MEASURE 'Sales'[Previous Month] = CALCULATE(sum(Sales[SalesAmount]),PREVIOUSMONTH(DATESMTD('Calendar'[Date])))
+;
+
+CREATE MEASURE 'Sales'[Previous -  Month] = CALCULATE(sum(Sales[SalesAmount]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))
+;
+
+CREATE MEASURE 'Sales'[PMYTD] = CALCULATE('Sales'[Sales],DATESBETWEEN('Calendar'[Date],FIRSTDATE(PREVIOUSMONTH('Calendar'[Date])),LASTDATE(DATEADD('Calendar'[Date],-1,MONTH)))) 
+;
+
+CREATE MEASURE 'Sales'[Last Year Sales] = CALCULATE(Sales[Sales],DATEADD('Calendar'[Date],-1,YEAR))
+;
+
+CREATE MEASURE 'Sales'[Last Qtr Sales] = CALCULATE(Sales[Sales],DATEADD('Calendar'[Date],-1,QUARTER))
+;
+
+CREATE MEASURE 'Sales'[Last Month Sales] = CALCULATE(Sales[Sales],DATEADD('Calendar'[Date],-1,MONTH))
+;
+
+CREATE MEASURE 'Sales'[Last Day Sales] = CALCULATE(Sales[Sales],DATEADD('Calendar'[Date],-1,DAY))
+;
+
+

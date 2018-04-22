@@ -1,0 +1,965 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-IN",
+    "dataSources": [
+      {
+        "name": "Access AdventureWorks_Learn_To_Write_DAX",
+        "connectionString": "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\\Lab Practices\\Power BI\\Lab _ Power BI _ Source\\AdventureWorks_Learn_To_Write_DAX\\AdventureWorks_Learn_To_Write_DAX.accdb;Persist Security Info=false",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "Access"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Calendar",
+        "columns": [
+          {
+            "name": "ID",
+            "dataType": "int64",
+            "sourceColumn": "ID",
+            "sourceProviderType": "SmallInt"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "DayNumberOfWeek",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfWeek",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DayName",
+            "dataType": "string",
+            "sourceColumn": "DayName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "DayNumberOfMonth",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfMonth",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DayNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "DayNumberOfYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "WeekNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "WeekNumberOfYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName",
+            "sortByColumn": "MonthNumberOfYear",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "MonthNumberOfYear",
+            "dataType": "int64",
+            "sourceColumn": "MonthNumberOfYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CalendarQuarter",
+            "dataType": "int64",
+            "sourceColumn": "CalendarQuarter",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CalendarYear",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FiscalQuarter",
+            "dataType": "int64",
+            "sourceColumn": "FiscalQuarter",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FiscalYear",
+            "dataType": "int64",
+            "sourceColumn": "FiscalYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FiscalSemester",
+            "dataType": "int64",
+            "sourceColumn": "FiscalSemester",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Period",
+            "dataType": "int64",
+            "sourceColumn": "Period",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "type": "calculated",
+            "name": "FinancialQuarter",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "\"Q\"&'Calendar'[FiscalQuarter] &\" - \"& 'Calendar'[FiscalYear]",
+            "sortByColumn": "FiscalQuarter"
+          },
+          {
+            "type": "calculated",
+            "name": "FinancialQuarterNames",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "'Calendar'[FiscalYear]&'Calendar'[FiscalQuarter]\t"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Calendar",
+            "dataView": "full",
+            "source": {
+              "query": "SELECT [Calendar].*   FROM [Calendar]",
+              "dataSource": "Access AdventureWorks_Learn_To_Write_DAX"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [Calendar].*   FROM [Calendar]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calender",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "CalendarYear"
+              },
+              {
+                "name": "MonthName",
+                "ordinal": 1,
+                "column": "MonthName"
+              },
+              {
+                "name": "Date",
+                "ordinal": 2,
+                "column": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Power Financial",
+            "levels": [
+              {
+                "name": "MonthName",
+                "ordinal": 2,
+                "column": "MonthName"
+              },
+              {
+                "name": "Date",
+                "ordinal": 3,
+                "column": "Date"
+              },
+              {
+                "name": "FinancialQuarter",
+                "ordinal": 1,
+                "column": "FinancialQuarter"
+              },
+              {
+                "name": "FiscalYear",
+                "ordinal": 0,
+                "column": "FiscalYear"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": "SELECT [Calendar].*   FROM [Calendar]"
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Calendar"
+          },
+          {
+            "name": "QueryEditorSerialization",
+            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [Calendar].*   FROM [Calendar]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+          }
+        ]
+      },
+      {
+        "name": "Customers",
+        "columns": [
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "GeographyKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "GeographyKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "BirthDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "BirthDate",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "MaritalStatus",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "MaritalStatus",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Gender",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "YearlyIncome",
+            "dataType": "decimal",
+            "isHidden": true,
+            "sourceColumn": "YearlyIncome",
+            "formatString": "\"₹\" #,0.00;#,0.00 -\"₹\";\"₹\" #,0.00",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"16393\" DisplayName=\"₹ English (India)\" Symbol=\"₹\" PositivePattern=\"2\" NegativePattern=\"12\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "NumberChildrenAtHome",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "NumberChildrenAtHome",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Occupation",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Occupation",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "HouseOwnerFlag",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "HouseOwnerFlag",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "NumberCarsOwned",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "NumberCarsOwned",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AddressLine1",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "AddressLine1",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "AddressLine2",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "AddressLine2",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Phone",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "DateFirstPurchase",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "DateFirstPurchase",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Customers",
+            "dataView": "full",
+            "source": {
+              "query": " \t\t\t\tSELECT [Customers].*   FROM [Customers] ",
+              "dataSource": "Access AdventureWorks_Learn_To_Write_DAX"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Customers].*   FROM [Customers] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Customers"
+          }
+        ]
+      },
+      {
+        "name": "Products",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductSubcategoryKey",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ProductSubcategoryKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductName",
+            "dataType": "string",
+            "sourceColumn": "ProductName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "StandardCost",
+            "dataType": "double",
+            "sourceColumn": "StandardCost",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "SafetyStockLevel",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "SafetyStockLevel",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ListPrice",
+            "dataType": "double",
+            "sourceColumn": "ListPrice",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Size",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "SizeRange",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SizeRange",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Weight",
+            "dataType": "double",
+            "isHidden": true,
+            "sourceColumn": "Weight",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "DaysToManufacture",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DaysToManufacture",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductLine",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ProductLine",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "DealerPrice",
+            "dataType": "double",
+            "sourceColumn": "DealerPrice",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Class",
+            "dataType": "string",
+            "sourceColumn": "Class",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ModelName",
+            "dataType": "string",
+            "sourceColumn": "ModelName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Description",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "Status",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Status",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "SubCategory",
+            "dataType": "string",
+            "sourceColumn": "SubCategory",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Products",
+            "dataView": "full",
+            "source": {
+              "query": " \t\t\t\tSELECT [Products].*   FROM [Products] ",
+              "dataSource": "Access AdventureWorks_Learn_To_Write_DAX"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Product",
+            "levels": [
+              {
+                "name": "Category",
+                "ordinal": 0,
+                "column": "Category"
+              },
+              {
+                "name": "SubCategory",
+                "ordinal": 1,
+                "column": "SubCategory"
+              },
+              {
+                "name": "ProductName",
+                "ordinal": 2,
+                "column": "ProductName"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Products].*   FROM [Products] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Products"
+          }
+        ]
+      },
+      {
+        "name": "Sales",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderDate",
+            "dataType": "dateTime",
+            "sourceColumn": "OrderDate",
+            "formatString": "General Date",
+            "sourceProviderType": "Date"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SalesTerritoryKey",
+            "dataType": "int64",
+            "sourceColumn": "SalesTerritoryKey",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SalesOrderNumber",
+            "dataType": "string",
+            "sourceColumn": "SalesOrderNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "SalesOrderLineNumber",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderLineNumber",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "OrderQuantity",
+            "dataType": "int64",
+            "sourceColumn": "OrderQuantity",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "double",
+            "sourceColumn": "UnitPrice",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "ExtendedAmount",
+            "dataType": "double",
+            "sourceColumn": "ExtendedAmount",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "UnitPriceDiscountPct",
+            "dataType": "int64",
+            "sourceColumn": "UnitPriceDiscountPct",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DiscountAmount",
+            "dataType": "int64",
+            "sourceColumn": "DiscountAmount",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductStandardCost",
+            "dataType": "double",
+            "sourceColumn": "ProductStandardCost",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "TotalProductCost",
+            "dataType": "double",
+            "sourceColumn": "TotalProductCost",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "SalesAmount",
+            "dataType": "double",
+            "sourceColumn": "SalesAmount",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "TaxAmt",
+            "dataType": "double",
+            "sourceColumn": "TaxAmt",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "Freight",
+            "dataType": "double",
+            "sourceColumn": "Freight",
+            "sourceProviderType": "Double"
+          },
+          {
+            "name": "RegionMonthID",
+            "dataType": "string",
+            "sourceColumn": "RegionMonthID",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sales",
+            "source": {
+              "query": "SELECT [Sales].*   FROM [Sales]",
+              "dataSource": "Access AdventureWorks_Learn_To_Write_DAX"
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT [Sales].*   FROM [Sales]</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+              }
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "name": "Sales",
+            "description": "Total Sales",
+            "expression": "ROUND(sum(Sales[SalesAmount]),2)"
+          },
+          {
+            "name": "Cost",
+            "expression": "ROUND( sum(Sales[ProductStandardCost]),2)\t"
+          },
+          {
+            "name": "Profit",
+            "expression": "[Sales]-[Cost]"
+          },
+          {
+            "name": "Margin %",
+            "expression": "([Profit]/[Cost])*100",
+            "kpi": {
+              "targetExpression": "'Sales'[Sales]",
+              "statusExpression": [
+                "var x='Sales'[Margin %]/'Sales'[_Margin % Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.33,-1,",
+                "\t                If(x<0.66,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "33"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "66"
+                }
+              ]
+            }
+          },
+          {
+            "name": "Previous Month",
+            "expression": "CALCULATE(sum(Sales[SalesAmount]),PREVIOUSMONTH(DATESMTD('Calendar'[Date])))"
+          },
+          {
+            "name": "Previous -  Month",
+            "expression": "CALCULATE(sum(Sales[SalesAmount]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))"
+          },
+          {
+            "name": "PMYTD",
+            "expression": "CALCULATE('Sales'[Sales],DATESBETWEEN('Calendar'[Date],FIRSTDATE(PREVIOUSMONTH('Calendar'[Date])),LASTDATE(DATEADD('Calendar'[Date],-1,MONTH)))) "
+          },
+          {
+            "name": "Last Year Sales",
+            "expression": "CALCULATE(Sales[Sales],DATEADD('Calendar'[Date],-1,YEAR))"
+          },
+          {
+            "name": "PMY - Bet TD",
+            "expression": "CALCULATE('Sales'[Sales],DATESBETWEEN('Calendar'[Date],FIRSTDATE(ALL('Calendar'[Date])), LASTDATE(DATEADD('Calendar'[Date],-1,MONTH)))) "
+          },
+          {
+            "name": "Total Sales YTD",
+            "expression": "TOTALYTD(Sales[Sales],'Calendar'[Date])"
+          },
+          {
+            "name": "Prev Month",
+            "expression": "CALCULATE((Sales[Sales]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))"
+          },
+          {
+            "name": "Copy of Prev Month",
+            "expression": "CALCULATE((Sales[Sales]),PARALLELPERIOD('Calendar'[Date],-1,MONTH))"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Sales].*   FROM [Sales] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Sales"
+          }
+        ]
+      },
+      {
+        "name": "Territory",
+        "columns": [
+          {
+            "name": "Territory Key",
+            "dataType": "int64",
+            "sourceColumn": "Territory Key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Region",
+            "dataType": "string",
+            "sourceColumn": "Region",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Group",
+            "dataType": "string",
+            "sourceColumn": "Group",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Territory",
+            "dataView": "full",
+            "source": {
+              "query": " \t\t\t\tSELECT [Territory].*   FROM [Territory] ",
+              "dataSource": "Access AdventureWorks_Learn_To_Write_DAX"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "SalesTerritory",
+            "levels": [
+              {
+                "name": "Group",
+                "ordinal": 0,
+                "column": "Group"
+              },
+              {
+                "name": "Country",
+                "ordinal": 1,
+                "column": "Country"
+              },
+              {
+                "name": "Region",
+                "ordinal": 2,
+                "column": "Region"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [Territory].*   FROM [Territory] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Territory"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "eabb1fad-40a6-49ac-8ef5-a3265648f9dc",
+        "fromTable": "Sales",
+        "fromColumn": "OrderDate",
+        "toTable": "Calendar",
+        "toColumn": "Date"
+      },
+      {
+        "name": "eedce2ba-6eda-4538-b8d6-a26ad1d61b2a",
+        "fromTable": "Sales",
+        "fromColumn": "SalesTerritoryKey",
+        "toTable": "Territory",
+        "toColumn": "Territory Key"
+      },
+      {
+        "name": "f680db43-5545-4ef8-8348-97a7a9aef911",
+        "fromTable": "Sales",
+        "fromColumn": "ProductKey",
+        "toTable": "Products",
+        "toColumn": "ProductKey"
+      },
+      {
+        "name": "f364738c-b111-49b1-8e3a-b9487ac3b3a5",
+        "fromTable": "Sales",
+        "fromColumn": "CustomerKey",
+        "toTable": "Customers",
+        "toColumn": "CustomerKey"
+      }
+    ],
+    "perspectives": [
+      {
+        "name": "New Perspective",
+        "tables": [
+          {
+            "name": "Customers",
+            "columns": [
+              {
+                "name": "Name"
+              }
+            ]
+          },
+          {
+            "name": "Products",
+            "columns": [
+              {
+                "name": "Category"
+              },
+              {
+                "name": "Class"
+              }
+            ]
+          },
+          {
+            "name": "Sales",
+            "columns": [
+              {
+                "name": "UnitPrice"
+              },
+              {
+                "name": "UnitPriceDiscountPct"
+              }
+            ],
+            "measures": [
+              {
+                "name": "Cost"
+              },
+              {
+                "name": "Profit"
+              },
+              {
+                "name": "Sales"
+              },
+              {
+                "name": "Margin %"
+              }
+            ]
+          },
+          {
+            "name": "Territory",
+            "columns": [
+              {
+                "name": "Country"
+              }
+            ]
+          },
+          {
+            "name": "Calendar",
+            "hierarchies": [
+              {
+                "name": "Calender"
+              },
+              {
+                "name": "Power Financial"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "modelPermission": "administrator"
+      },
+      {
+        "name": "Sales",
+        "modelPermission": "read"
+      },
+      {
+        "name": "Product",
+        "modelPermission": "refresh"
+      },
+      {
+        "name": "EMT",
+        "modelPermission": "readRefresh"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
